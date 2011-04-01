@@ -75,7 +75,7 @@ RK.InputPlaceholder = {
 		}
 	},
 	
-	placeHolderSubmitPrevent: function() {
+	placeholderSubmitPrevent: function() {
 		$$('form').addEvent('submit', function(e) {
 			this.getElements(inputSelector).each(function(input) {
 				if(input.value == input.get('placeholder')) {
