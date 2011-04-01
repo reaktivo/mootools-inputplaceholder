@@ -52,14 +52,18 @@ RK.InputPlaceholder = {
 	
 	inputBlur: function(e) {
 		console.log(e.target);
+	},
+	
+	updateInput: function(e) {
+		
 	}
 	
 }
 
 // Automatically initialize
-if( !('placeholder' in new Element('input')) ) {
+//if( !('placeholder' in new Element('input')) ) {
 	document.addEvent('domready', function() {
 		RK.InputPlaceholder.initialize();
 	});
-}
+//}
 
