@@ -82,9 +82,9 @@ RK.InputPlaceholder = {
 }
 
 // Automatically initialize
-//if( !('placeholder' in new Element('input')) ) {
+if( !('placeholder' in new Element('input')) ) {
 	document.addEvent('domready', function() {
 		RK.InputPlaceholder.initialize();
 	});
-//}
+}
 
