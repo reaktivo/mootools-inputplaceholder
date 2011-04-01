@@ -26,10 +26,11 @@ RK.InputPlaceholder = {
 	initialize: function() {
 		this.setInputSelector();
 		this.placeholderSubmitPrevent();
-		this.updateInputs();
+		this.updateAllInputs();
+		if(console) console.log(this);
 	},
 	
-	updateInputs: function() {
+	updateAllInputs: function() {
 		this.elements.each(function(el) {
 			this.updateInput(el, true);
 		}, this);
