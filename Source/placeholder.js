@@ -21,7 +21,7 @@ var RK = RK || {};
 RK.InputPlaceholder = {
 	
 	cssClass: 'placeholder',
-	inputSelector: 'input[placeholdern]',
+	inputSelector: 'input[placeholder]',
 	elements: null,
 	occlude: 'rk-inputplaceholder-occlude',
 	
@@ -59,7 +59,7 @@ RK.InputPlaceholder = {
 	
 	updateInput: function(el, focus) {
 	
-		var placeholder = el.get('placeholdern'),
+		var placeholder = el.get('placeholder'),
 			value = el.get('value');
 		
 		if(placeholder == value || value == '') {
@@ -72,7 +72,7 @@ RK.InputPlaceholder = {
 	placeholderSubmitPrevent: function() {
 		$$('form').addEvent('submit', function(e) {
 			this.getElements(inputSelector).each(function(input) {
-				if(input.value == input.get('placeholdern')) {
+				if(input.value == input.get('placeholder')) {
 					input.set('value', '');
 				}
 			});
