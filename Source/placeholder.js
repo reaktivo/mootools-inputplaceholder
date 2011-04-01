@@ -25,6 +25,14 @@ RK.InputPlaceholder = {
 	
 	initialize: function() {
 		this.setInputSelector();
+		this.placeholderSubmitPrevent();
+		this.updateInputs();
+	},
+	
+	updateInputs: function() {
+		this.elements.each(function(el) {
+			this.updateInput(el);
+		}, this);
 	},
 	
 	setCssClass: function(cssClass) {
@@ -35,27 +43,46 @@ RK.InputPlaceholder = {
 	setInputSelector: function(inputSelector) {
 		if(inputSelector) this.inputSelector = inputSelector;
 		if(this.elements) {
-			this.elements.removeEvent('focus', this.inputFocus);
-			this.elements.removeEvent('blur', this.inputBlur);
+			this.elements.removeEvent('focus', this.inputFocus.bind(this));
+			this.elements.removeEvent('blur', this.inputBlur.bind(this));
 		}
 		
 		this.elements = $$(this.inputSelector);
 		this.elements.addEvents({
 			focus: this.inputFocus,
 			blur: this.inputBlur
-		})
+		});
+		
 	},
 	
 	inputFocus: function(e) {
-		console.log(e.target);
+		this.updateInput(e.target, true);
 	},
 	
 	inputBlur: function(e) {
-		console.log(e.target);
+		this.updateInput(e.target, false);
 	},
 	
-	updateInput: function(e) {
+	updateInput: function(el, focus) {
+	
+		var placeholder = el.get('placeholder'),
+			value = el.get('value');
 		
+		if(placeholder == value || value == '') {
+			el.addClass(this.cssClass);
+			el[focus ? 'removeClass' : 'addClass'](this.cssClass);
+			el.set('value', focus ? '' : placeholder);	
+		}
+	},
+	
+	placeHolderSubmitPrevent: function() {
+		$$('form').addEvent('submit', function(e) {
+			this.getElements(inputSelector).each(function(input) {
+				if(input.value == input.get('placeholder')) {
+					input.set('value', '');
+				}
+			});
+		});
 	}
 	
 }
